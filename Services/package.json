@@ -1,0 +1,11 @@
+{
+  "name": "kmitl-smart-parking-for-university",
+  "version": "1.0.0",
+  "description": "KMITL Smart Parking for University",
+  "main": "index.js",
+  "scripts": {
+    "test": "dev"
+  },
+  "author": "",
+  "license": "ISC"
+}
