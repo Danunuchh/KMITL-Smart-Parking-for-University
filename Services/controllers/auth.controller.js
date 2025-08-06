@@ -26,7 +26,7 @@ const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       console.log("Invalid password!");
-      return res.status(401).json({ error: "Invalid credentials!" });
+      return res.status(401).json({ error: "Invalid password!" });
     }
 
     const token = jwt.sign(
@@ -40,7 +40,7 @@ const login = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-const registor = async (req, res) => {
+const register = async (req, res) => {
   const {
     email,
     fullname,
@@ -86,4 +86,4 @@ const registor = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-module.exports = { login, registor };
+module.exports = { login, register };
