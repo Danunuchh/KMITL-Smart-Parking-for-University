@@ -50,16 +50,30 @@ const registor = async (req, res) => {
     car_registration,
   } = req.body;
 
-  if (!email || !fullname || !phone_number || !password || !car_brand || !car_registration) {
+  if (
+    !email ||
+    !fullname ||
+    !phone_number ||
+    !password ||
+    !car_brand ||
+    !car_registration
+  ) {
     return res.status(400).json({ error: "All fields are required!" });
   }
-  
+
   try {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     const [result] = await conn.query(
       "INSERT INTO User (email,full_name,phone_number,password,car_brand,car_registration) VALUES (?, ?, ?, ?, ?, ?)",
-      [email, fullname, phone_number, hashedPassword, car_brand, car_registration]
+      [
+        email,
+        fullname,
+        phone_number,
+        hashedPassword,
+        car_brand,
+        car_registration,
+      ]
     );
 
     if (result.affectedRows === 1) {
@@ -72,4 +86,4 @@ const registor = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-module.exports = { login ,registor};
+module.exports = { login, registor };
