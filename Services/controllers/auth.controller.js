@@ -7,7 +7,9 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const [rows] = await conn.query("SELECT * FROM User WHERE email = ?", [email]);
+    const [rows] = await conn.query("SELECT * FROM User WHERE email = ?", [
+      email,
+    ]);
 
     if (rows.length === 0) {
       console.log("User not found!");
@@ -28,7 +30,7 @@ const login = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: user.user_id , email: user.email, role: user.role },
+      { id: user.user_id, email: user.email, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
@@ -38,5 +40,36 @@ const login = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+const registor = async (req, res) => {
+  const {
+    email,
+    fullname,
+    phone_number,
+    password,
+    car_brand,
+    car_registration,
+  } = req.body;
 
-module.exports = { login };
+  if (!email || !fullname || !phone_number || !password || !car_brand || !car_registration) {
+    return res.status(400).json({ error: "All fields are required!" });
+  }
+  
+  try {
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    const [result] = await conn.query(
+      "INSERT INTO User (email,full_name,phone_number,password,car_brand,car_registration) VALUES (?, ?, ?, ?, ?, ?)",
+      [email, fullname, phone_number, hashedPassword, car_brand, car_registration]
+    );
+
+    if (result.affectedRows === 1) {
+      res.status(201).json({ message: "User registered successfully!" });
+    } else {
+      res.status(500).json({ error: "Failed to register user!" });
+    }
+  } catch (error) {
+    console.error("Server error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+module.exports = { login ,registor};
