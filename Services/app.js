@@ -1,14 +1,17 @@
-// app.js
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
 const app = express();
 
-// Your application routes and middleware go here
-app.get('/', (req, res) => {
-  res.send('Hello from app.js!');
-});
+// routes
+const testroutes = require("./routes/test_route.js");
+const v1routes = require("./routes/v1_route.js");
 
-app.get('/api/users', (req, res) => {
-  res.json({ users: ['Alice', 'Bob'] });
-});
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-module.exports = app; // Export the application instance
+app.use("/", testroutes);
+app.use("/api/v1", v1routes);
+
+module.exports = app;
