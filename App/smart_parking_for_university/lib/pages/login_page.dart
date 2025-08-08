@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -6,7 +7,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xDDF0FFE1), // BGcolor
+      backgroundColor: const Color(0xFFE0FBDB), // BGcolor
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -36,10 +37,10 @@ class LoginPage extends StatelessWidget {
                       Stack(
                         alignment: Alignment.topRight,
                         children: [
-                          Image.asset('assets/car.png', height: 60),
+                          SvgPicture.asset('assets/car.svg', height: 60),
                           const Positioned(
                             top: 0,
-                            right: 2,
+                            left: 0,
                             child: Text(
                               'For',
                               style: TextStyle(
@@ -126,7 +127,9 @@ class LoginPage extends StatelessWidget {
                         onPressed: () {},
                         child: const Text(
                           'Login',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18),
                         ),
                       ),
                     ),
