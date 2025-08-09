@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_parking_for_university/pages/registor_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -33,21 +34,18 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 8),
-                      Stack(
-                        alignment: Alignment.topRight,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.asset('assets/car.png', height: 60),
-                          const Positioned(
-                            top: 0,
-                            right: 2,
-                            child: Text(
-                              'For',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          const Text(
+                            'For',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
+                          const SizedBox(width: 4),
+                          Image.asset('assets/car.png', height: 60),
                         ],
                       ),
                     ],
@@ -126,7 +124,7 @@ class LoginPage extends StatelessWidget {
                         onPressed: () {},
                         child: const Text(
                           'Login',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(color: Colors.white, fontSize: 18),
                         ),
                       ),
                     ),
@@ -139,7 +137,12 @@ class LoginPage extends StatelessWidget {
                         const Text("Don’t have an account? "),
                         GestureDetector(
                           onTap: () {
-                            // Sign Up page
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const RegistorPage(),
+                              ),
+                            );
                           },
                           child: const Text(
                             "Sign Up",
