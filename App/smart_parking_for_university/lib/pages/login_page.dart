@@ -143,6 +143,7 @@ class LoginPage extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             // Sign Up page
+                            Navigator.pushNamed(context, '/registor');  //เพิ่มให้ไปที่หน้า registor
                           },
                           child: const Text(
                             "Sign Up",
