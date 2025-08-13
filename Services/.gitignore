@@ -1,0 +1,17 @@
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/build
+.env
+
+# debug files
+npm-debug.log*
+yarn-debug.log*
+
+# OS files
+.DS_Store
+.vscode
